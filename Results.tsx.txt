@@ -1,0 +1,67 @@
+import { useContext } from "react";
+import { AppContext } from "../App";
+import { actions } from "../actions";
+import { Modal, Button } from "react-bootstrap";
+import { PieChart } from "react-minimal-pie-chart";
+
+const Results = () => {
+  const { setAnswer } = actions;
+  const [appData, dispatchAppData] = useContext(AppContext);
+
+  const handleLoadButtonClick = () => {
+    dispatchAppData(setAnswer(1, "Hello!", "string"));
+  };
+
+  return (
+    <div>
+      Results:
+      {Object.entries(appData.answers).map(([answerId, { value }]: any) => (
+        <div key={answerId}>{value}</div>
+      ))}
+      <button onClick={handleLoadButtonClick}>Load data</button>
+    </div>
+  );
+};
+
+
+function Question(props) {
+  let { correct, incorrect, testAgain } = props;
+  let correctPercentage = (correct / 10) * 100;
+  let incorrectPercentage = 100 - correctPercentage;
+
+  return (
+    <Modal show={true} onHide={testAgain} animation={false}>
+      <Modal.Header>
+        <Modal.Title>Your luck: {correctPercentage}%</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <PieChart
+          data={[
+            {
+              title: "Correct",
+              value: correctPercentage,
+              color: "#38bb38",
+            },
+            {
+              title: "Incorrect",
+              value: incorrectPercentage,
+              color: "#e24646",
+            },
+          ]}
+        />
+        <div className="numbers-container">
+          <div className="numbers">
+            <div className="number correct">{correct}</div>
+            <div className="number incorrect">{incorrect}</div>
+          </div>
+        </div>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button variant="primary" onClick={testAgain}>
+          Test again
+        </Button>
+      </Modal.Footer>
+    </Modal>
+  );
+}
+export default Results;
