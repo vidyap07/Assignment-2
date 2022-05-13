@@ -1,0 +1,60 @@
+[
+  {
+    "id": 1,
+    "question": "When does a new moon occur?",
+    "questionType": "radio",
+    "answerOptions": [
+      { "option": "Every 15 days", "isCorrect": true },
+      { "option": "Every 10 days", "isCorrect": false },
+      { "option": "Every 11 days", "isCorrect": false },
+      { "option": "Every 9 days", "isCorrect": false }
+    ]
+  },
+  {
+    "id": 2,
+    "question": "What are the primitive data types in JavaScript?",
+    "questionType": "checkbox",
+    "answerOptions": [
+      { "option": "string", "isCorrect": true },
+      { "option": "boolean", "isCorrect": true },
+      { "option": "object", "isCorrect": false },
+      { "option": "array", "isCorrect": false }
+    ]
+  }
+  {
+    "id": 3,
+    "question": "Does React.js create a VIRTUAL DOM in the memory?",
+    "questionType": "radio",
+    "answerOptions": [
+      { "option": "True", "isCorrect": true },
+      { "option": "False", "isCorrect": false }
+    ]
+  }
+{
+    "id": 4,
+    "question": "What is a state in React?",
+    "questionType": "text",
+    var answer = document.getElementById('guess-input').name;
+
+    var hint = document.getElementById('guess-input').value;
+
+	function guessAnswer() {
+       	 $("button.guess-submit").click(function(event) {
+
+       		var guess = $('#guess-input').val();
+   	        guess = guess.toLowerCase();
+
+                if ( guess == answer) {
+     	        $('#correct').show();
+     	        $('#wrong').hide();
+   		} else {
+      			$('#wrong').show().fadeOut(1000);
+      			$('#guess-input').val(hint);
+    		       }
+
+ 	 });
+
+}
+
+  }
+]
