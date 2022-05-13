@@ -1,0 +1,44 @@
+import React from "react";
+import axios from "axios";
+
+function Question(props) {
+  this.state = { questionNumber: 0 };
+  let style = {
+    margin: "5px"
+  };
+  clickHandler = () => {};
+
+  return (
+    <div className="Question">
+      <h4>{props.question}</h4>
+      <ul>
+        {props.choices.map((c, i) => (
+          <button style={style} clickHandler={this.clickHandler}>
+            {c.choice}
+          </button>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+class QuizApp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { questions: [], choices: [] };
+  }
+
+  componentDidMount() {
+    axios
+      .get(
+        "https://private-anon-c06008d89c-quizmasters.apiary-mock.com/questions"
+      )
+      .then(response => {
+        this.setState({ questions: response.data });
+      });
+  }
+
+  render() {
+    return <div>{this.state.questions.map(q => new Question(q))}</div>;
+  }
+}
